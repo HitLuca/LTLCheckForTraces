@@ -1,4 +1,4 @@
-package formula_verificator;
+package main.formula_verificator;
 
 import org.deckfour.xes.factory.XFactoryRegistry;
 import org.deckfour.xes.model.XAttribute;
@@ -46,8 +46,7 @@ public class Tester {
     private static DeclareMap getModel(String fileName) {
         AssignmentViewBroker broker = XMLBrokerFactory.newAssignmentBroker(fileName);
         AssignmentModel model = broker.readAssignment();
-        DeclareMap map = new DeclareMap(model, null, null, null, broker, null);
-        return map;
+        return new DeclareMap(model, null, null, null, broker, null);
     }
 
     // Generate XTrace from lists of attributes

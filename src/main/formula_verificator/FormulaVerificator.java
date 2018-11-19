@@ -1,11 +1,11 @@
-package formula_verificator;
+package main.formula_verificator;
 
-import formula_verificator.form.SimpleFormula;
 import ltl2aut.automaton.Automaton;
 import ltl2aut.automaton.Transition;
 import ltl2aut.formula.DefaultParser;
 import ltl2aut.formula.conjunction.*;
 import ltl2aut.ltl.SyntaxParserException;
+import main.formula_verificator.form.SimpleFormula;
 import org.processmining.plugins.declareminer.ExecutableAutomaton;
 import org.processmining.plugins.declareminer.PossibleNodes;
 
@@ -22,7 +22,6 @@ public class FormulaVerificator {
 
 
     private static String traceViolatedEventSimplified(String formula, ArrayList<String> trace) {
-
         // The next line basically doesn't do anything. It takes a String formula and saves it as String ltlFormula
         String ltlFormula = new SimpleFormula(formula).getLTLFormula();
         List<ltl2aut.formula.Formula> formulaeParsed = new ArrayList<>();

@@ -1,4 +1,4 @@
-package formula_verificator.form;
+package main.formula_verificator.form;
 
 
 public interface Formula {
