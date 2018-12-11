@@ -5,7 +5,6 @@ import org.deckfour.xes.in.XesXmlGZIPParser;
 import org.deckfour.xes.model.XLog;
 import org.deckfour.xes.model.XTrace;
 import org.processmining.plugins.declareanalyzer.DeclareAnalyzerSingleTracePlugin;
-import org.processmining.plugins.declareanalyzer.Tester;
 import org.processmining.plugins.declareminer.visualizing.AssignmentModel;
 import org.processmining.plugins.declareminer.visualizing.AssignmentViewBroker;
 import org.processmining.plugins.declareminer.visualizing.DeclareMap;
@@ -43,6 +42,19 @@ public class FormulaVerificatorWithData {
         return analyzer.analyze(trace, model);
     }
 
+    // returns whether the trace is conformant
+    // analyzer does the actual analyzing and returns a boolean -> true if trace is conformant
+    public boolean verifyTraceWithTime(String modelFile,
+                               String traceId,
+                               ArrayList<String> activities,
+                               ArrayList<String> groups,
+                               ArrayList<String> elapsed_times,
+                               ArrayList<Date> times) {
+        DeclareMap model = getModel(modelFile);
+        XTrace trace = Tester.genXtraceWithTime(traceId, activities, groups, elapsed_times, times);
+
+        return analyzer.analyze(trace, model);
+    }
 
     // this is just for testing purposes
     public void analyze() throws Exception {

@@ -76,4 +76,32 @@ public class Tester {
         return newTrace;
     }
 
+    // Generate XTrace from lists of attributes
+    public static XTrace genXtraceWithTime(String traceId, ArrayList<String> activities, ArrayList<String> groups, ArrayList<String> elapsed_times, ArrayList<Date> times) {
+
+        XTrace newTrace = XFactoryRegistry.instance().currentDefault().createTrace();
+        XAttributeMap attributeMap = XFactoryRegistry.instance().currentDefault().createAttributeMap();
+        XAttribute theTraceId = XFactoryRegistry.instance().currentDefault().createAttributeLiteral("concept:name" , traceId, null);
+        attributeMap.put("concept:name", theTraceId);
+        newTrace.setAttributes(attributeMap);
+
+        for (int i = 0; i < activities.size(); i++){
+            XEvent newEvent = XFactoryRegistry.instance().currentDefault().createEvent();
+            XAttributeMap newAttributeMap = XFactoryRegistry.instance().currentDefault().createAttributeMap();
+            XAttribute newAttribute1 = XFactoryRegistry.instance().currentDefault().createAttributeLiteral("concept:name" , activities.get(i), null);
+            XAttribute newAttribute2 = XFactoryRegistry.instance().currentDefault().createAttributeTimestamp("time:timestamp" , times.get(i), null);
+            XAttribute newAttribute3 = XFactoryRegistry.instance().currentDefault().createAttributeLiteral("org:resource" , groups.get(i), null);
+            XAttribute newAttribute4 = XFactoryRegistry.instance().currentDefault().createAttributeLiteral("elapsedtime:seconds" , elapsed_times.get(i), null);
+            //XAttribute newAttribute5 = XFactoryRegistry.instance().currentDefault().createAttributeLiteral("lifecycle:transition" , "complete", null);
+            newAttributeMap.put("concept:name", newAttribute1);
+            newAttributeMap.put("time:timestamp", newAttribute2);
+            newAttributeMap.put("org:resource", newAttribute3);
+            newAttributeMap.put("elapsedtime:seconds", newAttribute4);
+            //newAttributeMap.put("lifecycle:transition", newAttribute5);
+            newEvent.setAttributes(newAttributeMap);
+            newTrace.add(newEvent);
+        }
+
+        return newTrace;
+    }
 }

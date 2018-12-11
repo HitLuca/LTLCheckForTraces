@@ -33,6 +33,21 @@ public class StackEntryPoint {
         return verificator.verifyTrace(modelFile, traceId, activities, groups, times_final);
     }
 
+    // takes a declare model with the attributes of one trace and check whether the trace is violated
+    public boolean isTraceWithElapsedTimeViolated(String modelFile,
+                                                  String traceId,
+                                                  ArrayList<String> activities,
+                                                  ArrayList<String> groups,
+                                                  ArrayList<String> elapsed_times,
+                                                  ArrayList<String> times) throws Exception{
+        ArrayList<Date> times_final = new ArrayList<>();
+        for (String time : times) {
+            times_final.add(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(time));
+        }
+
+        return verificator.verifyTraceWithTime(modelFile, traceId, activities, groups, elapsed_times, times_final);
+    }
+
     // Generates an XLog from the attributes of the trace at hand
     public void generateXLog(ArrayList<String> tracesId, ArrayList<ArrayList<String>> activities, ArrayList<ArrayList<String>> groups, ArrayList<ArrayList<String>> times) throws Exception {
         ArrayList<ArrayList<Date>> times_final = new ArrayList<>();
