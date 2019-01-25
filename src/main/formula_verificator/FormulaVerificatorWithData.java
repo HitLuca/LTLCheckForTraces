@@ -1,8 +1,5 @@
 package main.formula_verificator;
 
-import org.deckfour.xes.in.XParser;
-import org.deckfour.xes.in.XesXmlGZIPParser;
-import org.deckfour.xes.model.XLog;
 import org.deckfour.xes.model.XTrace;
 import org.processmining.plugins.declareanalyzer.DeclareAnalyzerSingleTracePlugin;
 import org.processmining.plugins.declareminer.visualizing.AssignmentModel;
@@ -10,7 +7,6 @@ import org.processmining.plugins.declareminer.visualizing.AssignmentViewBroker;
 import org.processmining.plugins.declareminer.visualizing.DeclareMap;
 import org.processmining.plugins.declareminer.visualizing.XMLBrokerFactory;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -54,20 +50,5 @@ public class FormulaVerificatorWithData {
         XTrace trace = Tester.genXtraceWithTime(traceId, activities, groups, elapsed_times, times);
 
         return analyzer.analyze(trace, model);
-    }
-
-    // this is just for testing purposes
-    public void analyze() throws Exception {
-        String logFile = "/media/sf_SharedFolder/newlog.xes.gz";
-        String modelFile = "/media/sf_SharedFolder/newlog_model.xml";
-
-        XParser parser = new XesXmlGZIPParser();
-        XLog log = parser.parse(new File(logFile)).get(0);
-
-        DeclareMap model = getModel(modelFile);
-
-        for (XTrace trace : log) {
-            analyzer.analyze(trace, model);
-        }
     }
 }

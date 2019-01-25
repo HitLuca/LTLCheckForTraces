@@ -9,12 +9,23 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class StackEntryPoint {
-
     private FormulaVerificatorWithData verificator = new FormulaVerificatorWithData();
 
     public static void main(String[] args) {
         StackEntryPoint app = new StackEntryPoint();
-        GatewayServer server = new GatewayServer(app);
+        GatewayServer server;
+
+        if (args.length == 2) {
+            int port = Integer.parseInt(args[0]);
+            int pythonPort = Integer.parseInt(args[1]);
+            System.out.println("System port: " + port);
+            System.out.println("Python port: " + pythonPort);
+
+            server = new GatewayServer(app, port, pythonPort, 0, 0, null);
+        } else {
+            server = new GatewayServer(app);
+        }
+
         server.start();
         System.out.println("Gateway Server Started");
     }
